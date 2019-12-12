@@ -14,6 +14,9 @@ function http(api, data) {
 		timeout: 3000,
 	}
 	return Promise((reslove, reject) => {
+		if(api.loading) {
+			Loading();
+		}
 		uni.request({
 			...post_data,
 			success: (res) => {
@@ -22,6 +25,11 @@ function http(api, data) {
 			},
 			fail: (rej) => {
 				reject(rej);
+			},
+			complete: () => {
+				if(api.loading) {
+					hideLoading();
+				}
 			}
 		});
 	})

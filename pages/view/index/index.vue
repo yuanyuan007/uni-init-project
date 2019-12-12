@@ -11,10 +11,20 @@
 		<div @click="showModel">Modal</div>
 		<div @click="showActionSheet" ref="sheet">ActionSheet</div>
 		<view :animation="animationData" style="background:red;height:100rpx;width:100rpx"></view>
+	<view>
+	    <uni-calendar 
+	    :insert="true"
+	    :lunar="true" 
+	    :start-date="'2019-3-2'"
+	    :end-date="'2019-5-20'"
+	    @change="change"
+	     ></uni-calendar>
+	</view>
 	</div>
 </template>
 
 <script>
+	import uniCalendar from '@/components/uni-calendar/uni-calendar.vue'
 	import {
 		navigateTo,
 		setStorage,
@@ -30,6 +40,9 @@
 	} from 'pages/utils/uniApi.js';
 	import emits from 'pages/utils/uniX.js';
 	export default {
+		components:{
+			  uniCalendar
+		},
 		onShow() {
 			// uni.setNavigationBarTitle({
 			// 	title: '新的标题'
@@ -89,6 +102,9 @@
 			}
 		},
 		methods: {
+			  change(e) {
+			            console.log(e);
+			        },
 			link() {
 				emits.setValue({
 					a: '1'
